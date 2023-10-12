@@ -5,7 +5,9 @@ let books = JSON.parse(localStorage.getItem("books")) || []
 let loginUser = JSON.parse(localStorage.getItem("loginUser"));
 
 const addBook = async(book) =>{
-    let extTitle = books.find((item) => item.title === book.title)
+    let filteredBooks = books.filter(item => item.email === loginUser)//single user cannot have same book titles or same book info more than once
+
+    let extTitle = filteredBooks.find((item) => item.title === book.title)
     if(extTitle) {
         toast.success(`Book title is ${book.title} already exists  `)
     } else{
